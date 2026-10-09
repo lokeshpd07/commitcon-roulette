@@ -39,6 +39,21 @@ function Index() {
 
   return (
     <div className="event-page">
+      {/* Slowed-down dotted animation background video */}
+      <video
+        className="bg-video"
+        autoPlay
+        loop
+        muted
+        playsInline
+        aria-hidden="true"
+        style={{ playbackRate: 0.4 } as React.CSSProperties}
+        ref={(el) => { if (el) el.playbackRate = 0.4; }}
+      >
+        <source src="/animation.webm" type="video/webm" />
+      </video>
+      {/* Dark overlay to keep content readable */}
+      <div className="bg-video-overlay" />
       {/* Background ambient lighting overlays */}
       <div className="bg-glow-top" />
       <div className="bg-cyber-grid" />

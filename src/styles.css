@@ -129,6 +129,36 @@
   flex-direction: column;
 }
 
+/* Background Video */
+.bg-video {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  /* playbackRate is set via JS ref; CSS animation-duration slows it visually as well */
+  filter: grayscale(20%) brightness(0.7);
+}
+
+/* Dark overlay so content stays readable over the video */
+.bg-video-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    oklch(0.105 0.008 270 / 72%) 0%,
+    oklch(0.105 0.008 270 / 58%) 40%,
+    oklch(0.105 0.008 270 / 65%) 80%,
+    oklch(0.105 0.008 270 / 80%) 100%
+  );
+}
+
 .bg-glow-top {
   position: absolute;
   top: -120px;
@@ -138,7 +168,7 @@
   height: 450px;
   background: radial-gradient(ellipse at center, oklch(0.82 0.17 85 / 10%), transparent 70%);
   pointer-events: none;
-  z-index: 0;
+  z-index: 2;
 }
 
 .bg-cyber-grid {
@@ -149,9 +179,9 @@
     linear-gradient(var(--border) 1px, transparent 1px),
     linear-gradient(90deg, var(--border) 1px, transparent 1px);
   background-size: 64px 64px;
-  opacity: 0.12;
+  opacity: 0.08;
   mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
-  z-index: 0;
+  z-index: 2;
 }
 
 /* Header */
@@ -328,7 +358,7 @@
 .main-content {
   flex: 1;
   position: relative;
-  z-index: 1;
+  z-index: 10;
   padding: 36px 4% 80px;
   max-width: 1100px;
   margin: 0 auto;
@@ -1352,6 +1382,9 @@
   font-size: 11px;
   color: var(--muted-foreground);
   background: color-mix(in oklab, var(--background) 90%, transparent);
+  position: relative;
+  z-index: 10;
+  backdrop-filter: blur(8px);
 }
 
 .footer-brand {
@@ -1431,5 +1464,8 @@
   }
   .bounce-arrow {
     animation: none !important;
+  }
+  .bg-video {
+    display: none;
   }
 }
